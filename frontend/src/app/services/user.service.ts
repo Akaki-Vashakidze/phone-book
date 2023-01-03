@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { users } from '../Data';
-import { IUserLogin } from '../Interfaces/IUserLogin';
+import { IUserLoginData } from '../Interfaces/IUserLogin';
 import { User } from '../models/user';
-import { REGISTER_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL,REGISTER_URL } from '../shared/constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,11 @@ export class UserService {
     )
   }
 
-login(userLogin:IUserLogin){
+login(userLoginData:IUserLoginData){
+console.log(userLoginData)
+return this.http.post(USER_LOGIN_URL,userLoginData)
+
+
 // return this.http.post<User>(USER_LOGIN_URL,userLogin).pipe(
 //   tap({
 //     next:(user) => {

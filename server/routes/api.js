@@ -56,7 +56,7 @@ router.post('/addNumber',(req,res) => {
 
 router.post('/login', (req,res) => {
   let userData = req.body;
-  User.findOne({name:userData.name}, (error,User)=> {
+  User.findOne({username:userData.userName}, (error,User)=> {
     if(error){
       console.log(error)
     } else {
