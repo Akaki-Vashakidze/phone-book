@@ -1,0 +1,51 @@
+<div class="toolbar">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <mat-icon (click)="AddClick()">add</mat-icon>
+        <div class="sidenav-toggle" (click)="AddClick()">Add Number</div>
+        <div *ngIf="!signedIn" class="sign">
+          <span routerLink="/login" class="signs">Sign In</span>
+          <span routerLink="/registration" class="signs">Sign Up</span>
+        </div>
+        <div *ngIf="signedIn" class="sign">
+          <span class="signs">Log Out</span>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+
+
+  <mat-sidenav-container>
+    <mat-sidenav class="sidenav" mode="side" [(opened)]="opened">
+      <div class="numberAddForm">
+        <div class="form-input">
+          <mat-form-field color="accent">
+            <mat-label>Name:</mat-label>
+            <input #name matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="form-input">
+          <mat-form-field color="accent">
+            <mat-label>Last name:</mat-label>
+            <input #lastName matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="form-input">
+          <mat-form-field color="accent">
+            <mat-label>Number:</mat-label>
+            <input #number matInput />
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-raised-button (click)="getNewContact(name,lastName,number)" >
+        Add
+      </button>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

@@ -1,0 +1,28 @@
+<div class="Login-Div">
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input #Username matInput type="text" placeholder="Placeholder" />
+      <mat-icon matSuffix>account_box</mat-icon>
+      <mat-hint>Enter your Username</mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input #Password matInput type="password" placeholder="Placeholder" />
+      <mat-icon matSuffix>password</mat-icon>
+      <mat-hint>Enter your Passwor</mat-hint>
+    </mat-form-field>
+  </p>
+  <div class='buttons'>
+    <span
+      ><button mat-raised-button (click)="LogIn(Username, Password)">
+        Log In
+      </button></span
+    >
+    <span
+      ><button mat-raised-button (click)="Register()">Register</button></span
+    >
+  </div>
+</div>

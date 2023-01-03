@@ -1,0 +1,19 @@
+.Login-Div {
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 400px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(214, 217, 222);
+    border-radius: 8px;
+}
+
+.buttons {
+display: grid;
+grid-template-columns: 50% 50%;
+}

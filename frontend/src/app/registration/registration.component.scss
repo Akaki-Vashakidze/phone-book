@@ -1,0 +1,75 @@
+
+.form {
+    background: rgb(214, 217, 222);
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: ease-in 0.3s;
+  }
+
+  .form:hover {
+  transform: scale(1.01);
+  }
+
+  .form-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+  }
+
+
+  button{
+    margin: 2rem;
+  }
+  .reg-form-header {
+    text-align: center;
+    font-size: 26px;
+    margin: 2rem;
+    margin-top: 3rem;
+  }
+
+  .reg-form-div {
+    margin-top: 3rem;
+    width: 600px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+  }
+
+
+  /* მობილური */
+  @media only screen and (max-width: 600px) {
+
+    .form-inputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+    }
+  }
+
+  /* კომპიუტერი */
+  @media screen and (min-width: 600px) {
+    .form-inputs {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+
+    button {
+      transition: ease-in 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.04);
+    }
+  }
