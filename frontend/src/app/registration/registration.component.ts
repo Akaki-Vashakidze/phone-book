@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import {UserService} from '../services/user.service'
 
 @Component({
   selector: 'app-registration',
@@ -8,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
-  constructor(private snackBar: MatSnackBar, private router:Router) { }
+  registerUserData : any;
+  constructor(private userService:UserService,private snackBar: MatSnackBar, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -86,6 +87,18 @@ export class RegistrationComponent implements OnInit {
       password1.value,
       password2.value
     );
+
+    this.registerUserData = {
+      name:name.value,
+      lastName:lastName.value,
+      username:username.value,
+      gmail:gmail.value,
+      number:number.value,
+      password:password1.value
+    }
+    
+    this.userService.registerUser(this.registerUserData)
+
   };
 
   signUp = (

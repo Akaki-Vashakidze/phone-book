@@ -9,6 +9,7 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NumbersPageComponent } from './numbers-page/numbers-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import {UserService} from './services/user.service'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
