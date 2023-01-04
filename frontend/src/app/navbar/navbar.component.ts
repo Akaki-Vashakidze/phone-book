@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PhoneNumbersService } from '../services/phone-numbers.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,9 @@ import { PhoneNumbersService } from '../services/phone-numbers.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
-    private phoneNumbers: PhoneNumbersService
+    private phoneNumbers: PhoneNumbersService,
+    public userService:UserService
   ) {}
-  signedIn: boolean = false;
   opened = false;
   dialogRef: any;
   numbersArray :any;
@@ -23,6 +24,10 @@ export class NavbarComponent implements OnInit {
       this.numbersArray = item;
     })
   }
+
+ logoutUser() {
+  this.userService.logoutUser()
+ }
 
   AddClick = () => {
     this.opened = !this.opened;

@@ -5,13 +5,14 @@ import { users } from '../Data';
 import { IUserLoginData } from '../Interfaces/IUserLogin';
 import { User } from '../models/user';
 import { USER_LOGIN_URL,REGISTER_URL } from '../shared/constants/urls';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private router:Router) {
   }
 
   registerUser(user:any) {
@@ -37,7 +38,13 @@ return this.http.post(USER_LOGIN_URL,userLoginData)
  }
 
  loggedIn() {
+  console.log(!!localStorage.getItem('token'))
   return !!localStorage.getItem('token')
+ }
+
+ logoutUser () {
+  localStorage.removeItem('token');
+  this.router.navigate(['/'])
  }
 
  getToken() {
