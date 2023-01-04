@@ -16,13 +16,6 @@ export class UserService {
 
   registerUser(user:any) {
     return this.http.post<any>(REGISTER_URL,user)
-    .subscribe(
-      res => {
-        console.log(res)
-        localStorage.setItem('token',res.token)
-      },
-      err => console.log(err)
-    )
   }
 
 login(userLoginData:IUserLoginData){

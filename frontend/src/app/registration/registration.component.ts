@@ -96,8 +96,16 @@ export class RegistrationComponent implements OnInit {
       number:number.value,
       password:password1.value
     }
-    
+
     this.userService.registerUser(this.registerUserData)
+    .subscribe(
+      res => {
+        console.log(res)
+        localStorage.setItem('token',res.token)
+        this.router.navigate(['/numbers'])
+      },
+      err => console.log(err)
+    )
 
   };
 

@@ -25,6 +25,7 @@ logInData : any;
     (res :any) => {
       console.log(res)
       localStorage.setItem('token',res.token)
+      this.router.navigate(['./numbers'])
     },
     err => console.log(err)
   )
