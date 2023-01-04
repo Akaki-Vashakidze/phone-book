@@ -13,8 +13,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private phoneNumbers: PhoneNumbersService,
-    public userService:UserService
+    private userService:UserService
   ) {}
+  signedIn: boolean = false;
   opened = false;
   dialogRef: any;
   numbersArray :any;
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
     this.phoneNumbers.getNumbers().subscribe(item=>{
       this.numbersArray = item;
     })
+   this.signedIn = this.userService.loggedIn();
   }
 
  logoutUser() {

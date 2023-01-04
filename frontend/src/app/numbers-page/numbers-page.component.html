@@ -1,4 +1,4 @@
-<div class="table" *ngIf="loggedIn">
+<div class="table" *ngIf="this.userServide.loggedIn()">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
       <th

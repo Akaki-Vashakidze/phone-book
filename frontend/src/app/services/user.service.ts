@@ -38,7 +38,6 @@ return this.http.post(USER_LOGIN_URL,userLoginData)
  }
 
  loggedIn() {
-  console.log(!!localStorage.getItem('token'))
   return !!localStorage.getItem('token')
  }
 
