@@ -22,7 +22,10 @@ logInData : any;
   }
   this.userService.login(this.logInData)
   .subscribe(
-    res => console.log(res),
+    (res :any) => {
+      console.log(res)
+      localStorage.setItem('token',res.token)
+    },
     err => console.log(err)
   )
   console.log(this.logInData)
