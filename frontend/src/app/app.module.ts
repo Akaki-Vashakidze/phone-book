@@ -8,8 +8,10 @@ import { LogInComponent } from './log-in/log-in.component';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NumbersPageComponent } from './numbers-page/numbers-page.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {UserService} from './services/user.service'
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { PhoneNumbersService } from './services/phone-numbers.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,11 @@ import {UserService} from './services/user.service'
     MaterialModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService,PhoneNumbersService,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

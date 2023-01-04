@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { PhoneNumbersService } from '../services/phone-numbers.service';
+import { UserService } from '../services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-numbers-page',
@@ -12,13 +15,14 @@ import { PhoneNumbersService } from '../services/phone-numbers.service';
   styleUrls: ['./numbers-page.component.scss'],
 })
 export class NumbersPageComponent implements OnInit {
-  constructor(private numbersService: PhoneNumbersService) {}
+  constructor(private router:Router,private numbersService: PhoneNumbersService, private userServide:UserService) {}
 
   Data: any;
   columns: string[] = ['name', 'number', 'edits'];
   currentPage = 0;
   pageSize = 5;
   dataSource: any;
+  loggedIn : any;
 
   @ViewChild(MatSort) sort: MatSort | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
@@ -45,8 +49,13 @@ export class NumbersPageComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       },
       (err) => {
-        console.log(err);
+        if( err instanceof HttpErrorResponse) {
+          if(err.status === 401) {
+            this.router.navigate(['/login'])
+          }
+        }
       }
     );
+    this.loggedIn = this.userServide.loggedIn();
   }
 }

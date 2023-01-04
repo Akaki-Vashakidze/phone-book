@@ -36,4 +36,12 @@ return this.http.post(USER_LOGIN_URL,userLoginData)
 // )
  }
 
+ loggedIn() {
+  return !!localStorage.getItem('token')
+ }
+
+ getToken() {
+  return localStorage.getItem('token')
+ }
+
 }
