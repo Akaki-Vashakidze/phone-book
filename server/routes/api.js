@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const Number = require('../models/number')
-
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const number = require('../models/number');
 
@@ -37,7 +37,9 @@ router.post('/register',(req,res) => {
         if(error) {
             console.log('errroooooorrrr' + error)
         } else {
-            res.status(200).send(registeredUser)
+          let payload = {subject:registeredUser._id}
+          let token = jwt.sign(payload,'secretKey')
+            res.status(200).send({token})
         }
     });
 })
@@ -56,6 +58,7 @@ router.post('/addNumber',(req,res) => {
 
 router.post('/login', (req,res) => {
   let userData = req.body;
+  console.log(userData)
   User.findOne({username:userData.userName}, (error,User)=> {
     if(error){
       console.log(error)
@@ -63,13 +66,31 @@ router.post('/login', (req,res) => {
       if(!User) {
         res.status(401).send('invalid name')
       } else
-      if(User.password !== userData.password) {
+      if(User.password != userData.password) {
         res.status(401).send('Invalid password')
       } else {
-        res.status(200).send(User)
+        let payload = {subject:User._id}
+        let token = jwt.sign(payload,'secretKey')
+        res.status(200).send(token)
       }
     }
   })
+})
+
+router.get('/numbers',(req,res) => {
+  let numbersList = [
+    {"name":"akaki",
+     "number":"598780075"},
+     {"name":"nika",
+     "number":"598780084"},
+     {"name":"gio",
+     "number":"598755275"},
+     {"name":"zura",
+     "number":"598780075"},
+     {"name":"lasha",
+     "number":"597473645"},
+  ]
+  res.json(numbersList)
 })
 
 module.exports = router

@@ -13,8 +13,8 @@ export class PhoneNumbersService {
 
   constructor(private http:HttpClient) { }
 
-  getNumbers () : Observable<any> {
-    return this.http.get(NUMBERS_URL)
+  getNumbers () {
+    return this.http.get<any>(NUMBERS_URL)
   }
 
 }

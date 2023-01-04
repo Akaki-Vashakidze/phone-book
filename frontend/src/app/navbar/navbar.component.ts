@@ -29,11 +29,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/numbers']);
   };
 
-  getNewContact = (name: any, lastName: any, number: any) => {
+  getNewContact = (name: any, number: any) => {
 
     number = {
       name:name.value,
-      lastName:lastName.value,
       number:number.value
     }
 

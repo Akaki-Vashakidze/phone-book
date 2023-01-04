@@ -28,19 +28,12 @@
 
         <div class="form-input">
           <mat-form-field color="accent">
-            <mat-label>Last name:</mat-label>
-            <input #lastName matInput />
-          </mat-form-field>
-        </div>
-
-        <div class="form-input">
-          <mat-form-field color="accent">
             <mat-label>Number:</mat-label>
             <input #number matInput />
           </mat-form-field>
         </div>
       </div>
-      <button mat-raised-button (click)="getNewContact(name,lastName,number)" >
+      <button mat-raised-button (click)="getNewContact(name,number)" >
         Add
       </button>
 
