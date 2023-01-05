@@ -94,7 +94,8 @@ export class RegistrationComponent implements OnInit {
       username:username.value,
       gmail:gmail.value,
       number:number.value,
-      password:password1.value
+      password:password1.value,
+      numbers:[]
     }
 
     this.userService.registerUser(this.registerUserData)
@@ -103,6 +104,7 @@ export class RegistrationComponent implements OnInit {
         console.log(res)
         localStorage.setItem('token',res.token)
         this.router.navigate(['/numbers'])
+        this.userService.NavbarButtons(!!localStorage.getItem('token'))
       },
       err => console.log(err)
     )

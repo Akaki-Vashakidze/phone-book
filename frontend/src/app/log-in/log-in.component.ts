@@ -26,6 +26,7 @@ logInData : any;
       console.log(res)
       localStorage.setItem('token',res.token)
       this.router.navigate(['./numbers'])
+      this.userService.NavbarButtons(!!localStorage.getItem('token'))
     },
     err => console.log(err)
   )

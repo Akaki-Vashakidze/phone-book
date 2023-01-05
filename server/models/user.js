@@ -1,4 +1,5 @@
 const { mongoose } = require("mongoose")
+const { array } = require("mongoose/lib/utils")
 
 const Schema = mongoose.Schema
 
@@ -8,7 +9,8 @@ const userSchema = new Schema({
     username:String,
     gmail:String,
     number:String,
-    password:String
+    password:String,
+    numbers:Array
 })
 
 module.exports = mongoose.model('user',userSchema)

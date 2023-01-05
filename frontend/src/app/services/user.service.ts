@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { users } from '../Data';
 import { IUserLoginData } from '../Interfaces/IUserLogin';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
+
+  SignedIn = new EventEmitter<any>()
 
   constructor(private http:HttpClient,private router:Router) {
   }
@@ -38,7 +40,12 @@ return this.http.post(USER_LOGIN_URL,userLoginData)
  }
 
  loggedIn() {
+  console.log(!!localStorage.getItem('token'))
   return !!localStorage.getItem('token')
+ }
+
+ NavbarButtons(item: any) {
+   this.SignedIn.emit(item)
  }
 
  logoutUser () {

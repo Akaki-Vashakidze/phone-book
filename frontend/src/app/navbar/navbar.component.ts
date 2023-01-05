@@ -25,10 +25,16 @@ export class NavbarComponent implements OnInit {
       this.numbersArray = item;
     })
    this.signedIn = this.userService.loggedIn();
+   this.userService.SignedIn.subscribe(item=>{
+
+    this.signedIn=item
+    console.log(this.signedIn)
+   })
   }
 
  logoutUser() {
-  this.userService.logoutUser()
+  this.userService.logoutUser();
+  this.userService.NavbarButtons(!!localStorage.getItem('token'))
  }
 
   AddClick = () => {

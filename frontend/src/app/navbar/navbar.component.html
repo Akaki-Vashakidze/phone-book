@@ -3,7 +3,7 @@
       <mat-toolbar-row>
         <mat-icon (click)="AddClick()">add</mat-icon>
         <div class="sidenav-toggle" (click)="AddClick()">Add Number</div>
-        <div *ngIf="!signedIn" class="sign">
+        <div *ngIf="!signedIn" class="sign" >
           <span routerLink="/login" class="signs">Sign In</span>
           <span routerLink="/registration" class="signs">Sign Up</span>
         </div>
