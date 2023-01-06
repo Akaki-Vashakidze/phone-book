@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./numbers-page.component.scss'],
 })
 export class NumbersPageComponent implements OnInit {
-  constructor(private router:Router,private numbersService: PhoneNumbersService, public userServide:UserService) {}
+  constructor(private router:Router,private numbersService: PhoneNumbersService, public userServise:UserService) {}
 
   Data: any;
   columns: string[] = ['name', 'number', 'edits'];
@@ -57,5 +57,6 @@ export class NumbersPageComponent implements OnInit {
         }
       }
     );
+    this.loggedIn = this.userServise.loggedIn()
   }
 }

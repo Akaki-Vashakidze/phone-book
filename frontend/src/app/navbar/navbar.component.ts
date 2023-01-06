@@ -38,8 +38,13 @@ export class NavbarComponent implements OnInit {
  }
 
   AddClick = () => {
-    this.opened = !this.opened;
-    this.router.navigate(['/numbers']);
+    if(this.signedIn) {
+        this.opened = !this.opened;
+        this.router.navigate(['/numbers']);
+    } else {
+      this.router.navigate(['login'])
+    }
+
   };
 
   addNewContact = (name: any, number: any) => {
