@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { PhoneNumbersService } from '../services/phone-numbers.service';
 
 @Component({
   selector: 'app-log-in',
@@ -10,14 +11,14 @@ import { Router } from '@angular/router';
 export class LogInComponent implements OnInit {
 returnUrl = '';
 logInData : any;
-  constructor(private userService: UserService,private router:Router) { }
+  constructor(private phoneNumbersService:PhoneNumbersService,private userService: UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
 
  LogIn = (Username1: any,Password1: any) => {
   this.logInData = {
-     userName: Username1.value,
+     username: Username1.value,
      password: Password1.value
   }
   this.userService.login(this.logInData)
@@ -30,6 +31,8 @@ logInData : any;
     },
     err => console.log(err)
   )
+
+  this.phoneNumbersService.updateUserUsername(this.logInData)
   console.log(this.logInData)
  }
 

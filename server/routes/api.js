@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const number = require('../models/number');
 
-
+let ActiveUserName;
 
 var mognoConnect = function () {
     mongoose.connect('mongodb+srv://vashaka29:lE7ajA5ySwDZY48p@cluster0.fc7ke.mongodb.net/nikkkkk?retryWrites=true&w=majority', { useNewUrlParser: true } ,function (err, db) {
@@ -31,6 +31,7 @@ router.get('/',(req,res) => {
 
 
 router.post('/register',(req,res) => {
+    ActiveUserName = req.body.username;
     let userData = req.body;
     let user = new User(userData)
     user.save((error,registeredUser)=>{
@@ -57,8 +58,9 @@ router.post('/addNumber',(req,res) => {
 })
 
 router.post('/login', (req,res) => {
+   ActiveUserName = req.body.username;
   let userData = req.body;
-  User.findOne({username:userData.userName}, (error,User)=> {
+  User.findOne({username:userData.username}, (error,User)=> {
     if(error){
       console.log(error)
     } else {
@@ -77,13 +79,13 @@ router.post('/login', (req,res) => {
 })
 
 router.post('/addnumbers',(req,res)=> {
-  let userData1 = req.body
-  console.log(userData1.name)
+  let Data = req.body
+  console.log(Data)
   User.findOneAndUpdate ({
-   username:"akaki"
+   username:Data.userName
   },{
     $push:{
-      numbers:'111111111'
+      numbers:Data.numberInfo
     }
   },(err) => (
     console.log(err)
@@ -91,8 +93,15 @@ router.post('/addnumbers',(req,res)=> {
 })
 
 router.get('/numbers',verifyToken,(req,res) => {
+  let numbersArray
   User.find().then((result) => {
-    let numbersArray = result
+    result.map(item=>{
+      if(item.username == ActiveUserName) {
+        numbersArray = item.numbers
+      }
+    })
+    console.log(numbersArray)
+
   res.send(numbersArray)
   }).catch(err=>{
     console.log(err)

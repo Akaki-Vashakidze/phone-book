@@ -44,6 +44,7 @@ export class NumbersPageComponent implements OnInit {
     this.numbersService.getNumbers().subscribe(
       (res) => {
         this.Data = res;
+        console.log(this.Data)
         this.dataSource = new MatTableDataSource(this.Data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

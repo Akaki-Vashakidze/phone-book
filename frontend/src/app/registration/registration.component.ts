@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {UserService} from '../services/user.service'
+import {UserService} from '../services/user.service';
+import { PhoneNumbersService } from '../services/phone-numbers.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +11,7 @@ import {UserService} from '../services/user.service'
 })
 export class RegistrationComponent implements OnInit {
   registerUserData : any;
-  constructor(private userService:UserService,private snackBar: MatSnackBar, private router:Router) { }
+  constructor(private phoneNumbersService:PhoneNumbersService,private userService:UserService,private snackBar: MatSnackBar, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -108,6 +109,9 @@ export class RegistrationComponent implements OnInit {
       },
       err => console.log(err)
     )
+
+
+  this.phoneNumbersService.updateUserUsername(this.registerUserData)
 
   };
 

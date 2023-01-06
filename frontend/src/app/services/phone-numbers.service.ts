@@ -9,6 +9,7 @@ import { ADD_NUMBERS_URL, NUMBERS_URL } from '../shared/constants/urls';
 })
 export class PhoneNumbersService {
 
+  userUsername:any;
   UserData : any;
   phoneNumbers1 = phoneNumbers;
 
@@ -18,8 +19,16 @@ export class PhoneNumbersService {
     this.UserData = data;
   }
 
-  addNumber(userInfo:any) {
-    return this.http.post<any>(ADD_NUMBERS_URL,userInfo)
+  updateUserUsername (data:any) {
+    this.userUsername = data.username;
+  }
+
+  addNumber(numberInfo:any) {
+    let info = {
+      userName:this.userUsername,
+      numberInfo
+    }
+    return this.http.post<any>(ADD_NUMBERS_URL,info)
    }
 
   getNumbers () {
