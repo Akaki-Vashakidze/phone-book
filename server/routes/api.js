@@ -58,7 +58,6 @@ router.post('/addNumber',(req,res) => {
 
 router.post('/login', (req,res) => {
   let userData = req.body;
-  console.log(userData)
   User.findOne({username:userData.userName}, (error,User)=> {
     if(error){
       console.log(error)
@@ -77,24 +76,30 @@ router.post('/login', (req,res) => {
   })
 })
 
+router.post('/addnumbers',(req,res)=> {
+  let userData1 = req.body
+  console.log(userData1.name)
+  User.findOneAndUpdate ({
+   username:"akaki"
+  },{
+    $push:{
+      numbers:'111111111'
+    }
+  },(err) => (
+    console.log(err)
+  ))
+})
+
 router.get('/numbers',verifyToken,(req,res) => {
-  let numbersList = [
-    {"name":"akaki",
-     "number":"598780075"},
-     {"name":"nika",
-     "number":"598780084"},
-     {"name":"gio",
-     "number":"598755275"},
-     {"name":"zura",
-     "number":"598780075"},
-     {"name":"lasha",
-     "number":"597473645"},
-  ]
-  res.json(numbersList)
+  User.find().then((result) => {
+    let numbersArray = result
+  res.send(numbersArray)
+  }).catch(err=>{
+    console.log(err)
+  })
 })
 
 function verifyToken(req,res,next){
-  console.log(req.headers)
   if(!req.headers.authorization) {
     return res.status(401).send('Unauthorized request')
   }

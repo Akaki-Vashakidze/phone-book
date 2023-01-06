@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
-    private phoneNumbers: PhoneNumbersService,
+    private phoneNumbersService: PhoneNumbersService,
     private userService:UserService
   ) {}
   signedIn: boolean = false;
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   numbersArray :any;
 
   ngOnInit(): void {
-    this.phoneNumbers.getNumbers().subscribe(item=>{
+    this.phoneNumbersService.getNumbers().subscribe(item=>{
       this.numbersArray = item;
     })
    this.signedIn = this.userService.loggedIn();
@@ -42,15 +42,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/numbers']);
   };
 
-  getNewContact = (name: any, number: any) => {
+  addNewContact = (name: any, number: any) => {
 
-    number = {
+    let info = {
       name:name.value,
       number:number.value
     }
 
-    this.phoneNumbers.phoneNumbers1.push(number)
-
-    console.log(this.phoneNumbers.phoneNumbers1)
+    this.phoneNumbersService.addNumber(info)
+    .subscribe(res=>console.log(res + 'oooooooo'))
  };
 }
