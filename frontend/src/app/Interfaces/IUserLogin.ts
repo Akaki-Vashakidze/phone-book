@@ -1,4 +1,4 @@
 export interface IUserLoginData {
-  userName:string;
+  username:string;
   password:string;
 }

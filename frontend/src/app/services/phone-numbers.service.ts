@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { phoneNumbers } from '../Data';
 import { ADD_NUMBERS_URL, NUMBERS_URL } from '../shared/constants/urls';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ export class PhoneNumbersService {
 
   userUsername:any;
   UserData : any;
-  phoneNumbers1 = phoneNumbers;
 
   constructor(private http:HttpClient) { }
 
@@ -28,6 +26,7 @@ export class PhoneNumbersService {
       userName:this.userUsername,
       numberInfo
     }
+    console.log(info)
     return this.http.post<any>(ADD_NUMBERS_URL,info)
    }
 

@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   opened = false;
   dialogRef: any;
   numbersArray :any;
+  userName:any = localStorage.getItem('ActiveUsername');
 
   ngOnInit(): void {
     this.phoneNumbersService.getNumbers().subscribe(item=>{
@@ -26,9 +27,14 @@ export class NavbarComponent implements OnInit {
     })
    this.signedIn = this.userService.loggedIn();
    this.userService.SignedIn.subscribe(item=>{
-
     this.signedIn=item
-    console.log(this.signedIn)
+   })
+   this.userService.ActiveUser.subscribe(item=>{
+    console.log(item)
+    if(item) {
+       this.userName = item
+    }
+
    })
   }
 
@@ -44,7 +50,6 @@ export class NavbarComponent implements OnInit {
     } else {
       this.router.navigate(['login'])
     }
-
   };
 
   addNewContact = (name: any, number: any) => {
@@ -53,6 +58,8 @@ export class NavbarComponent implements OnInit {
       name:name.value,
       number:number.value
     }
+
+    console.log(info)
 
     this.phoneNumbersService.addNumber(info)
     .subscribe(res=>console.log(res + 'oooooooo'))

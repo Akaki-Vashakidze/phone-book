@@ -12,6 +12,7 @@ import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {UserService} from './services/user.service'
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PhoneNumbersService } from './services/phone-numbers.service';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PhoneNumbersService } from './services/phone-numbers.service';
     routingComponents,
     LogInComponent,
     NavbarComponent,
-    NumbersPageComponent
+    NumbersPageComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,8 @@
           <span routerLink="/registration" class="signs">Sign Up</span>
         </div>
         <div *ngIf="signedIn" class="sign">
-          <span class="signs" (click)="logoutUser()">Log Out</span>
+          <span class="signs" >{{userName}} 's Phonebook</span>
+          <span class="signs logout" (click)="logoutUser()">Log Out</span>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>

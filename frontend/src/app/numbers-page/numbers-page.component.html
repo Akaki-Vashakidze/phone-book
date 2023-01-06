@@ -1,4 +1,6 @@
-<div class="table" *ngIf="loggedIn">
+<h1 class="message" *ngIf="loggedIn && !hasNumbers">Your nmbers list is empty. You can add new numbers now!</h1>
+
+<div class="table" *ngIf="loggedIn && hasNumbers">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
       <th

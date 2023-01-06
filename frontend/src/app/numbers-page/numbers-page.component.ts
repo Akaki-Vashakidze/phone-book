@@ -23,6 +23,7 @@ export class NumbersPageComponent implements OnInit {
   pageSize = 5;
   dataSource: any;
   loggedIn : any;
+  hasNumbers:any;
 
   @ViewChild(MatSort) sort: MatSort | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
@@ -44,10 +45,15 @@ export class NumbersPageComponent implements OnInit {
     this.numbersService.getNumbers().subscribe(
       (res) => {
         this.Data = res;
-        console.log(this.Data)
+        console.log(this.Data.length)
+        if(this.Data.length > 0) {
+        this.hasNumbers = true
         this.dataSource = new MatTableDataSource(this.Data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        } else {
+        this.hasNumbers = false;
+        }
       },
       (err) => {
         if( err instanceof HttpErrorResponse) {
