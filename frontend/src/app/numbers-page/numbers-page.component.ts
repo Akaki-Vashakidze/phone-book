@@ -9,6 +9,7 @@ import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-numbers-page',
   templateUrl: './numbers-page.component.html',
@@ -29,8 +30,21 @@ export class NumbersPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
   delete = (index: any) => {
-    console.log(this.currentPage * this.pageSize + index);
-  };
+    console.log(this.currentPage * this.pageSize + index, this.Data);
+    let numberIndex = this.currentPage * this.pageSize + index
+    this.Data.splice(numberIndex,1)
+    console.log(this.Data)
+    if(this.Data.length == 0) {
+      this.hasNumbers = false;
+    }
+    this.numbersService.deleteNumber(this.Data).subscribe(item=>{
+      console.log(item)
+    })
+
+    setTimeout(() => {
+      this.numbersService.updateNumberList(this.Data)
+    }, 500);
+  }
 
   onPageChange = (event: any) => {
     this.currentPage = event.pageIndex;
@@ -48,9 +62,12 @@ export class NumbersPageComponent implements OnInit {
         console.log(this.Data.length)
         if(this.Data.length > 0) {
         this.hasNumbers = true
-        this.dataSource = new MatTableDataSource(this.Data);
+        setTimeout(() => {
+            this.dataSource = new MatTableDataSource(this.Data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        }, 500);
+
         } else {
         this.hasNumbers = false;
         }
@@ -64,5 +81,18 @@ export class NumbersPageComponent implements OnInit {
       }
     );
     this.loggedIn = this.userServise.loggedIn()
+
+    this.numbersService.UpdatedList.subscribe(list => {
+      this.Data = list
+      console.log(this.Data)
+      this.dataSource = new MatTableDataSource(this.Data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
+      if(this.Data.length != 0) {
+         this.hasNumbers = true;
+      }
+
+    })
   }
 }

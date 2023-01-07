@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PhoneNumbersService } from '../services/phone-numbers.service';
@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   dialogRef: any;
   numbersArray :any;
   userName:any = localStorage.getItem('ActiveUsername');
+  UpdatedNumbers = new EventEmitter<any>()
 
   ngOnInit(): void {
     this.phoneNumbersService.getNumbers().subscribe(item=>{
@@ -36,6 +37,10 @@ export class NavbarComponent implements OnInit {
     }
 
    })
+
+   this.UpdatedNumbers.subscribe(item => {
+    this.phoneNumbersService.updateNumberList(item)
+   })
   }
 
  logoutUser() {
@@ -44,6 +49,7 @@ export class NavbarComponent implements OnInit {
  }
 
   AddClick = () => {
+
     if(this.signedIn) {
         this.opened = !this.opened;
         this.router.navigate(['/numbers']);
@@ -63,5 +69,13 @@ export class NavbarComponent implements OnInit {
 
     this.phoneNumbersService.addNumber(info)
     .subscribe(res=>console.log(res + 'oooooooo'))
+
+    setTimeout(() => {
+      this.phoneNumbersService.getNumbers()
+      .subscribe(item => {
+        this.UpdatedNumbers.emit(item)
+      })
+    }, 500);
+
  };
 }

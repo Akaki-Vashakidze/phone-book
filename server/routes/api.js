@@ -7,6 +7,7 @@ const Number = require('../models/number')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const number = require('../models/number');
+const user = require('../models/user')
 
 let ActiveUserName;
 
@@ -80,7 +81,6 @@ router.post('/login', (req,res) => {
 
 router.post('/addnumbers',(req,res)=> {
   let Data = req.body
-  console.log(Data)
   User.findOneAndUpdate ({
    username:Data.userName
   },{
@@ -92,6 +92,32 @@ router.post('/addnumbers',(req,res)=> {
   ))
 })
 
+router.post('/editNumbers',(req,res) => {
+  let Data = req.body
+  User.findOneAndUpdate ({
+    username:Data.userName
+   },{
+     $push:{
+       numbers:Data.numberInfo
+     }
+   },(err) => (
+     console.log(err)
+   ))
+})
+
+router.post('/deletenumber',(req,res) => {
+  console.log(req.body)
+  User.updateOne({
+    username:req.body.username
+   },{
+     $set:{
+       numbers:req.body.numbersArray
+     }
+   },(err) => (
+     console.log(err)
+   ))
+})
+
 router.get('/numbers',verifyToken,(req,res) => {
   let numbersArray
   User.find().then((result) => {
@@ -100,7 +126,6 @@ router.get('/numbers',verifyToken,(req,res) => {
         numbersArray = item.numbers
       }
     })
-    console.log(numbersArray)
 
   res.send(numbersArray)
   }).catch(err=>{
